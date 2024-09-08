@@ -9,6 +9,8 @@ circuito.adicionaCarga('Q',2.4,0.75,False)
 print(circuito.cargas)
 print(abs(circuito.I)*1000)
 print(circuito.S)
+print(abs(circuito.fp))
+circuito.mostrarTriangulo()
 #print("\n"*5)
 
 
