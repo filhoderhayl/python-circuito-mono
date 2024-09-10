@@ -154,18 +154,18 @@ def mostrar_resultados(preco_kwh, horas_consumo,novo_fp):
     # Adiciona linhas na tabela com rótulos
     custoBase = circuito.P*preco_kwh*horas_consumo
     if(circuito.fp>=.9):
-        custoEnergiaAntes = custoBase-int((circuito.fp-.85)*10)*0.001*custoBase
+        custoEnergiaAntes = custoBase-int((circuito.fp-.85)*100)*0.001*custoBase
     if(circuito.fp < 0.9 and circuito.fp > 0.85):
-        custoEnergiaAntes = custoBase-int((circuito.fp-.85)*10)*0.001*custoBase+int((.9-circuito.fp)*10)*0.001*custoBase
+        custoEnergiaAntes = custoBase-int((circuito.fp-.85)*100)*0.001*custoBase+int((.9-circuito.fp)*10)*0.001*custoBase
     if(circuito.fp < 0.85):
-        custoEnergiaAntes = custoBase+int((.9-circuito.fp)*10)*0.001*custoBase
+        custoEnergiaAntes = custoBase+int((.9-circuito.fp)*100)*0.001*custoBase
 
     if(novo_fp>=.9):
-        custoEnergiaCompensado = custoBase-int((novo_fp-.85)*10)*0.001*custoBase
+        custoEnergiaCompensado = custoBase-int((novo_fp-.85)*100)*0.001*custoBase
     if(novo_fp < 0.9 and novo_fp > 0.85):
-       custoEnergiaCompensado = custoBase-int((novo_fp-.85)*10)*0.001*custoBase+int((.9-novo_fp)*10)*0.001*custoBase
+       custoEnergiaCompensado = custoBase-int((novo_fp-.85)*100)*0.001*custoBase+int((.9-novo_fp)*10)*0.001*custoBase
     if(novo_fp < 0.85):
-        custoEnergiaCompensado = custoBase+int((.9-novo_fp)*10)*0.001*custoBase
+        custoEnergiaCompensado = custoBase+int((.9-novo_fp)*100)*0.001*custoBase
 
     tabela.insert("", "end", values=("Corrente", abs(circuito.I)*1000, abs(compensado.I)*1000))
     tabela.insert("", "end", values=("Custo do Consumo de Energia", custoEnergiaAntes, custoEnergiaCompensado))
