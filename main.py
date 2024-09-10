@@ -173,7 +173,7 @@ def mostrar_resultados(preco_kwh, horas_consumo,novo_fp):
     tk.Button(janela_resultados, text="Voltar", command=janela_resultados.destroy).pack(pady=10)
 
 def exibir_cargas():
-    messagebox.showinfo("Exibir Cargas", "Opção 'Exibir Cargas' selecionada.")
+    #messagebox.showinfo("Exibir Cargas", "Opção 'Exibir Cargas' selecionada.")
      # Cria uma nova janela para mostrar os resultados
     janela_cargas = tk.Toplevel(root)
     janela_cargas.title("Cargas adicionadas ao circuito")
@@ -184,14 +184,14 @@ def exibir_cargas():
 
     # Cabeçalhos das colunas
     tabela.heading("Carga", text="Carga")
-    tabela.heading("P", text="P")
-    tabela.heading("Q", text="Q")
-    tabela.heading("S", text="S") 
-    tabela.heading("I", text="I") 
+    tabela.heading("P", text="P(kW)")
+    tabela.heading("Q", text="Q(kVAr)")
+    tabela.heading("S", text="S(kVA)") 
+    tabela.heading("I", text="I(A)") 
     for i, carga in enumerate(circuito.cargas):
-        tabela.insert("", "end", values=("Carga "+str(i), carga.P, carga.Q, abs(carga.S), abs(carga.I)))
+        tabela.insert("", "end", values=("Carga "+str(i+1), carga.P, carga.Q, abs(carga.S), 1000*abs(carga.I)))
         
-    tabela.insert("", "end", values=("Total", circuito.P, circuito.Q, abs(circuito.S), abs(circuito.I)))
+    tabela.insert("", "end", values=("Total", circuito.P, circuito.Q, abs(circuito.S), 1000*abs(circuito.I)))
     
 
     tk.Button(janela_cargas, text="Voltar", command=janela_cargas.destroy).pack(pady=10)
