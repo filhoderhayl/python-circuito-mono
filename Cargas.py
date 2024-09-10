@@ -1,5 +1,6 @@
 from math import sin, cos, tan, asin, acos, atan
 import matplotlib.pyplot as plt
+from copy import copy
 class Carga():
     def __init__(self):
         #Fator de Potência
@@ -28,7 +29,7 @@ class CargaP(Carga):
             self.Q = -(self.S)*sin(acos(self.fp))
         
         self.Scplx = complex(self.P,self.Q)
-        self.I = V/self.Scplx
+        self.I = self.Scplx/V
 
 class CargaQ(Carga):
     def __init__(self,V,Q,fp,fpAdiantado):
@@ -40,7 +41,7 @@ class CargaQ(Carga):
         self.S = abs(self.Q)/sin(acos(fp))
         self.P = self.S * fp
         self.Scplx = complex(self.P,self.Q)
-        self.I = V/self.Scplx
+        self.I = self.Scplx/V
 
 class CargaS(Carga):
     def __init__(self,V,S,fp,fpAdiantado):
@@ -52,6 +53,7 @@ class CargaS(Carga):
             self.Q = -S*sin(acos(fp))
         self.P = S*fp
         self.Scplx = complex(self.P,self.Q)
+        self.I = self.Scplx/V
 
 
 class Circuito():
@@ -90,6 +92,7 @@ class Circuito():
         self.S = complex(self.P,self.Q)
         self.fp = self.P/abs(self.S)
         self.I = self.S/self.Vin
+        #print(abs(self.I))
     def mostrarTriangulo(self):
         #definindo linhas da Potência Real(Ativa)
         p1,p2 = [0,self.P],[0,0]
@@ -97,9 +100,10 @@ class Circuito():
         s1,s2 = [0,self.P],[0,self.Q]
         if(self.Q>=0):
             plt.xlim(-.2*self.P, 1.2*self.P), plt.ylim(-.2*self.Q, 1.2*self.Q)
-            plt.plot(p1, p2, label = 'P')
-            plt.plot(q1, q2, label = 'Q')
-            plt.plot(s1, s2, label = 'S')
+            plt.plot(p1, p2, label = 'P(kW)')
+            plt.plot(q1, q2, label = 'Q(kVAr)')
+            plt.plot(s1, s2, label = 'S(kVA)')
+            plt.legend(loc="upper right")
             plt.legend(loc="upper left")
             plt.show()
         else:
